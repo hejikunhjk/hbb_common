@@ -157,7 +157,11 @@ const CHARS: &[char] = &[
 ];
 
 pub const RENDEZVOUS_SERVERS: &[&str] = &["rustdesk.drpo.top"];
-pub const RS_PUB_KEY: &str = "1zU5uDmKCsG+tKcsZUpghWkjF+l9n+uHcyKhTSyfMh4=";
+pub const PUBLIC_RS_PUB_KEY: &str = "1zU5uDmKCsG+tKcsZUpghWkjF+l9n+uHcyKhTSyfMh4=";
+pub const RS_PUB_KEY: &str = match option_env!("RS_PUB_KEY") {
+  Some(key) if !key.is_empty() => key,
+  _ => PUBLIC_RS_PUB_KEY,
+};
 
 pub const RENDEZVOUS_PORT: i32 = 21116;
 pub const RELAY_PORT: i32 = 21117;
